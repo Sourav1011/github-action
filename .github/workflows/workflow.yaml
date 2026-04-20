@@ -18,6 +18,7 @@ jobs:
         run: echo "Hello from workflow"
 
   say-bye:
+  needs: build
     runs-on: ubuntu-latest
 
     steps:
