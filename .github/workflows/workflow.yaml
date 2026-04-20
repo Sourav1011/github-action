@@ -22,4 +22,4 @@ jobs:
 
     steps:
       - name: Say Bye
-        run: echo "Bye from workflow"
+        run: echo "Hello Again"
