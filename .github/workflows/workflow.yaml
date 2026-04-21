@@ -50,3 +50,10 @@ jobs:
 
       - name: List files
         run: ls
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy
+        run: echo "Deploy successfully"
