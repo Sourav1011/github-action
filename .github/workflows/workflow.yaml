@@ -25,35 +25,64 @@
 #       - name: Say Bye
 #         run: echo "Hello Again"
 
+# name: Uses action
+
+# on: push
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Setup Node.js
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 20
+
+#       - name: Install dependencies
+#         run: npm i
+
+#       - name: Run tests
+#         run: npm run test
+
+#       - name: List files
+#         run: ls
+#   deploy:
+#     needs: test
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Deploy
+#         run: echo "Deploy successfully"
+
+
 name: Uses action
 
 on: push
 
 jobs:
-  test:
+  jobs1:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: create a file
+        run: echo "Hello World" > file.txt
+        name: upload an artifact
+        uses: actions/upload-artifact@v4
         with:
-          node-version: 20
-
-      - name: Install dependencies
-        run: npm i
-
-      - name: Run tests
-        run: npm run test
-
-      - name: List files
-        run: ls
-  deploy:
-    needs: test
+          name: my-file
+          path: file.txt
+  jobs2:
+    needs: jobs1
     runs-on: ubuntu-latest
 
     steps:
-      - name: Deploy
-        run: echo "Deploy successfully"
+      - name: download a file
+        uses: actions/download-artifact@v4
+        with:
+          name: my-file
+      - name: read file.txt
+        run: cat file.txt
